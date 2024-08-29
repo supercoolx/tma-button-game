@@ -11,7 +11,7 @@ import WebApp from '@twa-dev/sdk';
 const Home = function () {
     const initData = WebApp.initDataUnsafe;
     const username = useMemo(() => {
-        return initData && initData.user ? user.username : undefined;
+        return initData && initData.user ? initData.user.username : undefined;
     }, [initData]);
 
     const [userId, setUserId] = useState('');
