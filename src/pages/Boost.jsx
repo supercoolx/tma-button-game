@@ -1,10 +1,13 @@
+import WebApp from '@twa-dev/sdk';
 import { initUtils } from "@telegram-apps/sdk";
 import { HiUsers } from "react-icons/hi";
 
 const Boost = function () {
+    const user = WebApp.initDataUnsafe.user;
+
     const handleInviteFriend = function () {
         const utils = initUtils();
-        const inviteLink = 'https://t.me/button_game_123_bot/test2';
+        const inviteLink = `https://t.me/button_game_123_bot/test2?inviter_id=${user.id}`;
         const shareText = 'Join our button game.';
         const fullUrl = `https://t.me/share/url?url=${encodeURIComponent(inviteLink)}&text=${encodeURIComponent(shareText)}`;
         utils.openTelegramLink(fullUrl);

@@ -11,23 +11,20 @@ const Leaderboard = function () {
     }, []);
 
     return (
-        <div className="w-full min-h-screen bg-[rgb(243,248,240)]">
+        <div className="w-full min-h-screen bg-[rgb(243,248,240)] px-8">
             <div className='container flex flex-col items-center justify-center pt-10 mx-auto'>
-                <div className='flex items-center justify-between w-full px-8 mt-3'>
-                    <FaMedal size={30} />
+                <div className='flex items-center text-xl gap-3 w-full mt-3 mb-8'>
+                    <FaMedal size={30} /> Leaderboard
                 </div>
-                <div className="flex justify-between w-full px-20 mt-20 font-bold">
-                    <div>No</div>
-                    <div>Name</div>
-                    <div>Score</div>
+                <div className="flex flex-col w-full gap-5">
+                    { users.map((user, key) => (
+                        <div key={key} className="flex gap-3 p-3 text-xl justify-between w-full bg-white rounded-lg">
+                            <div className="flex gap-2 items-center"><FaMedal size={30} />{key + 1}</div>
+                            <div className="flex-1">{user.username}</div>
+                            <div>{user.score}</div>
+                        </div>
+                    )) }                    
                 </div>
-                { users.map((user, key) => (
-                    <div key={key} className="flex justify-between w-full px-20">
-                        <div>{key + 1}</div>
-                        <div>{user.username}</div>
-                        <div>{user.score}</div>
-                    </div>
-                )) }                    
             </div>
         </div>
     );

@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API = axios.create({ baseURL: 'https://clickminiapp-server.onrender.com/' });
+const API = axios.create({ baseURL: 'http://localhost:5000/' });
 // API.interceptors.request.use(config => {
 //     if(!config.headers) config.headers = {};
 //     config.headers.Authorization = localStorage.getItem('token') || '';

@@ -2,6 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'jackpot';
+  src: url('./assets/fonts/default.woff2');
+}
+
+* {
+  font-family: 'jackpot';
+}
+
 body {
   background: var(--tg-theme-secondary-bg-color, white);
   padding: 0;
