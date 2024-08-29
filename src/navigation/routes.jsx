@@ -17,7 +17,7 @@ import Home from '@/pages/Home';
  * @type {Route[]}
  */
 export const routes = [
-  { path: '/', Component: IndexPage },
+  { path: '/', Component: Home },
   { path: '/init-data', Component: InitDataPage, title: 'Init Data' },
   { path: '/theme-params', Component: ThemeParamsPage, title: 'Theme Params' },
   { path: '/launch-params', Component: LaunchParamsPage, title: 'Launch Params' },
