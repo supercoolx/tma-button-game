@@ -10,10 +10,13 @@ import WebApp from '@twa-dev/sdk';
 import { Link } from '@/components/Link/Link';
 
 const Home = function () {
-    const initData = WebApp.initDataUnsafe;
+    const user = WebApp.initDataUnsafe.user;
     const username = useMemo(() => {
-        return initData && initData.user ? initData.user.username || initData.user.first_name : undefined;
-    }, [initData]);
+        API.post('api/v1/auth/login', { username: user.id, fullname: user.first_name + ' ' + user.last_name }).then((res) => {
+			setUserId(res.data.user.userId);
+		});
+        return user.first_name;
+    }, [user]);
 
     const [userId, setUserId] = useState('');
     const [gameId, setGameId] = useState('');
