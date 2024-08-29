@@ -72,7 +72,7 @@ const Home = function () {
     const mouseLeaveHandler = () => setPushed(false);
 
     return (
-        <div className='w-full min-h-screen bg-[rgb(243,248,240)]'>
+        <div className='w-full min-h-screen bg-[rgb(243,248,240)] text-black'>
             {heart ? <div className='absolute top-0 left-0 z-10 w-screen h-screen animate-warning' style={{ backgroundImage: 'radial-gradient(transparent, #ffaaaa)' }}></div> : ''}
             <div className='container flex flex-col items-center justify-center pt-10'>
                 <div className='flex justify-between w-full px-10'>

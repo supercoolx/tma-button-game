@@ -14,7 +14,7 @@ const Boost = function () {
     }
 
     return (
-        <div className="w-full min-h-screen bg-[rgb(243,248,240)] pt-10">
+        <div className="w-full min-h-screen bg-[rgb(243,248,240)] pt-10 text-black">
             <h1 className="text-2xl text-center">Boost your chance of<br />hitting the jackpot!</h1>
             <div className="p-3 mx-5 mt-5 bg-white rounded-xl">
                 <p className="text-sm text-center">Invite a friend and get a DOUBLE chance to win a jackpot price!</p>
