@@ -1,9 +1,9 @@
 {
-  "name": "reactjs-js-tsdk-template",
+  "name": "tma-button-game",
   "private": true,
   "version": "0.0.1",
   "type": "module",
-  "homepage": "https://telegram-mini-apps.github.io/reactjs-js-tsdk-template",
+  "homepage": "https://supercoolx.github.io/tma-button-game",
   "scripts": {
     "deploy": "gh-pages -d dist",
     "dev": "vite",
