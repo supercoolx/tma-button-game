@@ -66,7 +66,7 @@ const Home = function () {
                 </div>
                 <div className='flex items-center justify-between w-full px-16 mt-3'>
                     <button className=''><MdOutlineInfo size={30} /></button>
-                    <a href='/leaderboard' className=''><GiTrophyCup size={30} /></a>
+                    <Link to='/leaderboard' className=''><GiTrophyCup size={30} /></Link>
                 </div>
                 <div className='flex items-center justify-center w-full gap-3 px-16 my-20'>
                     <FaMedal size={30} /> <span className='text-4xl font-extrabold'>{max_score}</span>
