@@ -7,11 +7,12 @@ import { MdBolt } from 'react-icons/md';
 import API from '@/modules/Api';
 import Audio from '@/modules/Audio';
 import WebApp from '@twa-dev/sdk';
+import { Link } from '@/components/Link/Link';
 
 const Home = function () {
     const initData = WebApp.initDataUnsafe;
     const username = useMemo(() => {
-        return initData && initData.user ? initData.user.username : undefined;
+        return initData && initData.user ? initData.user.username || initData.user.first_name : undefined;
     }, [initData]);
 
     const [userId, setUserId] = useState('');
@@ -82,7 +83,7 @@ const Home = function () {
                     <div className={`w-48 h-48 select-none absolute -top-1 left-6 bg-gradient-to-t from-indigo-400 to-indigo-300 rounded-full cursor-pointer transition-all duration-200 flex justify-center items-center text-5xl font-bold ${pushed ? 'translate-y-4' : ''}`}>{score}</div>
                 </div>
                 {info ? <p className="text-center">{info}</p> : ''}
-                <a href='/boost' className='flex items-center px-10 py-2 mt-5 text-white bg-blue-600 rounded-full shadow-md'>Boost <MdBolt size={20} /></a>
+                <Link to='/boost' className='flex items-center px-10 py-2 mt-5 text-white bg-blue-600 rounded-full shadow-md'>Boost <MdBolt size={20} /></Link>
             </div>
         </div>
     )

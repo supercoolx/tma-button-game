@@ -4,6 +4,7 @@ import { LaunchParamsPage } from '@/pages/LaunchParamsPage/LaunchParamsPage.jsx'
 import { ThemeParamsPage } from '@/pages/ThemeParamsPage/ThemeParamsPage.jsx';
 import { TONConnectPage } from '@/pages/TONConnectPage/TONConnectPage';
 import Home from '@/pages/Home';
+import Boost from '@/pages/Boost';
 
 /**
  * @typedef {object} Route
@@ -18,6 +19,7 @@ import Home from '@/pages/Home';
  */
 export const routes = [
   { path: '/', Component: Home },
+  { path: '/boost', Component: Boost },
   { path: '/init-data', Component: InitDataPage, title: 'Init Data' },
   { path: '/theme-params', Component: ThemeParamsPage, title: 'Theme Params' },
   { path: '/launch-params', Component: LaunchParamsPage, title: 'Launch Params' },
