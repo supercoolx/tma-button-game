@@ -7,7 +7,7 @@ const Boost = function () {
 
     const handleInviteFriend = function () {
         const utils = initUtils();
-        const inviteLink = `https://t.me/button_game_123_bot/test2?inviter_id=${user.id}`;
+        const inviteLink = `https://t.me/button_game_123_bot/test2?startapp=${user.id}`;
         const shareText = 'Join our button game.';
         const fullUrl = `https://t.me/share/url?url=${encodeURIComponent(inviteLink)}&text=${encodeURIComponent(shareText)}`;
         utils.openTelegramLink(fullUrl);
