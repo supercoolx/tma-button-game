@@ -1,6 +1,7 @@
+import { HiUsers } from "react-icons/hi";
 import WebApp from '@twa-dev/sdk';
 import { initUtils } from "@telegram-apps/sdk";
-import { HiUsers } from "react-icons/hi";
+import API from "@/modules/Api";
 
 const Boost = function () {
     const user = WebApp.initDataUnsafe.user;
@@ -11,6 +12,13 @@ const Boost = function () {
         const shareText = 'Join our button game.';
         const fullUrl = `https://t.me/share/url?url=${encodeURIComponent(inviteLink)}&text=${encodeURIComponent(shareText)}`;
         utils.openTelegramLink(fullUrl);
+    }
+
+    const handleTelegramClick = function () {
+        const utils = initUtils();
+        const channelLink = 'https://t.me/hamster_kombat';
+        API.post('/api/v1/jointg', { username: user.id }).then(res => console.log('join telegram channel:', res.data));
+        utils.openTelegramLink(channelLink);
     }
 
     return (
@@ -28,7 +36,7 @@ const Boost = function () {
                 <p className="mt-3 text-center">Time: 4h each</p>
             </div>
             <div className="flex justify-between px-5">
-                <button className="flex items-center gap-2 px-10 py-2 mt-5 text-sm text-white bg-blue-600 rounded-full">Telegram</button>
+                <button onClick={handleTelegramClick} className="flex items-center gap-2 px-10 py-2 mt-5 text-sm text-white bg-blue-600 rounded-full">Telegram</button>
                 <button className="flex items-center gap-2 px-10 py-2 mt-5 text-sm text-white bg-blue-600 rounded-full">X / Twitter</button>
             </div>
         </div>
