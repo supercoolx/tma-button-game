@@ -13,12 +13,12 @@ import jackpotImg from '@/assets/images/jackpot.png';
 const Home = function () {
     const user = WebApp.initDataUnsafe.user;
     const username = useMemo(() => {
-        // console.log('user info:', user, 'invitor: ' + WebApp.initDataUnsafe.start_param);
-        // API.post('api/v1/auth/login', { username: user.id, fullname: user.first_name + ' ' + user.last_name, invitor: WebApp.initDataUnsafe.start_param || '' }).then((res) => {
-		// 	setUserId(res.data.user.userId);
-		// });
-        // return user.first_name + ' ' + user.last_name;
-        return 'sldkfj';
+        console.log('user info:', user, 'invitor: ' + WebApp.initDataUnsafe.start_param);
+        API.post('api/v1/auth/login', { username: user.id, fullname: user.first_name + ' ' + user.last_name, invitor: WebApp.initDataUnsafe.start_param || '' }).then((res) => {
+			setUserId(res.data.user.userId);
+		});
+        return user.first_name + ' ' + user.last_name;
+        // return 'sldkfj';
     }, [user]);
 
     const [userId, setUserId] = useState('');
@@ -35,8 +35,8 @@ const Home = function () {
         if (isClaimable) return;
         setPushed(true);
         try {
-            // const response = await API.post('/api/v1/todos', { id: gameId, userid: userId });
-            const response = { data: { _id: '234', score: 1, max_score: 1, jackpot: 1, heart: 1}};
+            const response = await API.post('/api/v1/todos', { id: gameId, userid: userId });
+            // const response = { data: { _id: '234', score: 1, max_score: 1, jackpot: 1, heart: 1}};
             setGameId(response.data._id);
             setScore(response.data.score);
             setMaxScore(response.data.max_score);
