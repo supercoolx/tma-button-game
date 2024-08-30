@@ -15,6 +15,7 @@ const Home = function () {
     const user = WebApp.initDataUnsafe.user;
     const [searchParams, setSearchParams] = useSearchParams();
     const username = useMemo(() => {
+        console.log('user info:', user, 'invitor: ' + searchParams.get('inviter_id'));
         API.post('api/v1/auth/login', { username: user.id, fullname: user.first_name + ' ' + user.last_name, invitor: searchParams.get('inviter_id') }).then((res) => {
 			setUserId(res.data.user.userId);
 		});
