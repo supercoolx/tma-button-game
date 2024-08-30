@@ -4,6 +4,7 @@ import { FaMedal } from 'react-icons/fa';
 import { useState, useEffect } from 'react';
 import { GiTrophyCup } from 'react-icons/gi';
 import { MdOutlineInfo } from 'react-icons/md';
+import { useSearchParams } from 'react-router-dom';
 import API from '@/modules/Api';
 import Audio from '@/modules/Audio';
 import WebApp from '@twa-dev/sdk';
@@ -12,8 +13,9 @@ import jackpotImg from '@/assets/images/jackpot.png';
 
 const Home = function () {
     const user = WebApp.initDataUnsafe.user;
+    const [searchParams, setSearchParams] = useSearchParams();
     const username = useMemo(() => {
-        API.post('api/v1/auth/login', { username: user.id, fullname: user.first_name + ' ' + user.last_name }).then((res) => {
+        API.post('api/v1/auth/login', { username: user.id, fullname: user.first_name + ' ' + user.last_name, invitor: searchParams.get('inviter_id') }).then((res) => {
 			setUserId(res.data.user.userId);
 		});
         return user.first_name + ' ' + user.last_name;
