@@ -12,8 +12,8 @@ export default {
           '50%': { opacity: 0 }
         },
         disappear: {
-          '0%': { transform: 'translate(0, 0px)' },
-          '1%': { transform: 'translate(0, 0px)', opacity: 1 },
+          '0%': { transform: 'translate(0, 0px)', opacity: 1 },
+          '40%': { transform: 'translate(0, 0px)', opacity: 1 },
           '100%': { transform: 'translate(0, -100px)', opacity: 0 }
         }
       },

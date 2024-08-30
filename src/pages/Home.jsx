@@ -18,6 +18,7 @@ const Home = function () {
 			setUserId(res.data.user.userId);
 		});
         return user.first_name + ' ' + user.last_name;
+        // return 'sldkfj';
     }, [user]);
 
     const [userId, setUserId] = useState('');
@@ -28,13 +29,13 @@ const Home = function () {
     const [heart, setHeart] = useState(0);
     const [pushed, setPushed] = useState(false);
     const [isClaimable, setClaimable] = useState(false);
-    const [isShowGetEffect, setShowGetEffect] = useState(false);
 
     const mouseDownHandler = async () => {
         if (isClaimable) return;
         setPushed(true);
         try {
             const response = await API.post('/api/v1/todos', { id: gameId, userid: userId });
+            // const response = { data: { _id: '234', score: 1, max_score: 1, jackpot: 1, heart: 1}};
             setGameId(response.data._id);
             setScore(response.data.score);
             setMaxScore(response.data.max_score);
@@ -49,9 +50,7 @@ const Home = function () {
                         setClaimable(true);
                         setTimeout(() => {
                             setClaimable(false);
-                            setShowGetEffect(true);
-                            setTimeout(() => setShowGetEffect(false), 1980);
-                        }, 1000);
+                        }, 1980);
                     }
                     else {
 
@@ -98,10 +97,11 @@ const Home = function () {
                     <div className={`w-48 h-48 absolute top-3 left-6 bg-indigo-500 rounded-full shadow-slate-600 border-2 border-slate-700 ${pushed ? 'shadow-md' : 'shadow-lg'}`}></div>
                     <div className={`w-48 h-48 select-none absolute -top-1 left-6 bg-gradient-to-t from-indigo-400 to-indigo-300 rounded-full cursor-pointer transition-all duration-200 flex justify-center items-center text-5xl font-bold ${pushed ? 'translate-y-4' : ''}`}>{score}</div>
                 </div>
-                { isClaimable && <img src={jackpotImg} className='w-16 h-16 cursor-pointer animate-bounce' alt="jackpot image" />}
-                { isShowGetEffect && <div className='text-xl font-bold opacity-1 animate-disappear'>+ 10</div>}
+                <div className='relative flex justify-center'>
+                    { isClaimable && <img src={jackpotImg} className='relative top-0 h-16 cursor-pointer animate-disappear' alt="jackpot image" />}
+                    <Link to='/boost' className='absolute flex items-center px-10 py-2 mt-5 text-white bg-blue-600 rounded-full shadow-md top-20'>Boost <MdBolt size={20} /></Link>
+                </div>
                 
-                <Link to='/boost' className='flex items-center px-10 py-2 mt-5 text-white bg-blue-600 rounded-full shadow-md'>Boost <MdBolt size={20} /></Link>
             </div>
         </div>
     )
