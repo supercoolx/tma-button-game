@@ -16,14 +16,14 @@ const Boost = function () {
 
     const handleTelegramClick = function () {
         const utils = initUtils();
-        const channelLink = 'https://t.me/hamster_kombat';
+        const channelLink = 'https://t.me/thebuttoncoin';
         API.post('/api/v1/todos/jointg', { username: user.id }).then(res => console.log('join telegram channel:', res.data));
         utils.openTelegramLink(channelLink);
     }
     
     const handleTwitterClick = function () {
         const utils = initUtils();
-        const xLink = 'https://twitter.com/hamster_kombat';
+        const xLink = 'https://X.com/thebuttoncoin';
         API.post('/api/v1/todos/followx', { username: user.id }).then(res => console.log('follow twitter account:', res.data));
         utils.openLink(xLink);
     }
