@@ -13,7 +13,7 @@ import jackpotImg from '@/assets/images/jackpot.png';
 const Home = function () {
     const user = WebApp.initDataUnsafe.user;
     const username = useMemo(() => {
-        console.log('user info:', user, 'invitor: ' + searchParams);
+        console.log('user info:', user, 'invitor: ' + WebApp.initDataUnsafe.start_param);
         API.post('api/v1/auth/login', { username: user.id, fullname: user.first_name + ' ' + user.last_name, invitor: WebApp.initDataUnsafe.start_param || '' }).then((res) => {
 			setUserId(res.data.user.userId);
 		});
