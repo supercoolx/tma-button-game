@@ -73,7 +73,7 @@ const Home = function () {
 
     return (
         <div className='w-full min-h-screen bg-[rgb(243,248,240)] text-black'>
-            {heart ? <div className='absolute top-0 left-0 z-10 w-screen h-screen animate-warning' style={{ backgroundImage: 'radial-gradient(transparent, #ffaaaa)' }}></div> : ''}
+            {heart ? <div className='fixed top-0 left-0 z-10 w-screen h-screen animate-warning' style={{ backgroundImage: 'radial-gradient(transparent, #ffaaaa)' }}></div> : ''}
             <div className='container flex flex-col items-center justify-center pt-10'>
                 <div className='flex justify-between w-full px-10'>
                     <div className='text-lg font-bold text-blue-500'>buttoncoin</div>
@@ -97,7 +97,7 @@ const Home = function () {
                     <div className={`w-48 h-48 absolute top-3 left-6 bg-indigo-500 rounded-full shadow-slate-600 border-2 border-slate-700 ${pushed ? 'shadow-md' : 'shadow-lg'}`}></div>
                     <div className={`w-48 h-48 select-none absolute -top-1 left-6 bg-gradient-to-t from-indigo-400 to-indigo-300 rounded-full cursor-pointer transition-all duration-200 flex justify-center items-center text-5xl font-bold ${pushed ? 'translate-y-4' : ''}`}>{score}</div>
                 </div>
-                <div className='relative flex justify-center'>
+                <div className='relative flex justify-center h-60'>
                     { isClaimable && <img src={jackpotImg} className='relative top-0 h-16 cursor-pointer animate-disappear' alt="jackpot image" />}
                     <Link to='/boost' className='absolute flex items-center px-10 py-2 mt-5 text-white bg-blue-600 rounded-full shadow-md top-20'>Boost <MdBolt size={20} /></Link>
                 </div>
