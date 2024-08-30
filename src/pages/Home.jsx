@@ -18,7 +18,6 @@ const Home = function () {
 			setUserId(res.data.user.userId);
 		});
         return user.first_name + ' ' + user.last_name;
-        return "lskdjflkjsdf";
     }, [user]);
 
     const [userId, setUserId] = useState('');
@@ -48,6 +47,11 @@ const Home = function () {
                     setHeart(0);
                     if (response.data.jackpot) {
                         setClaimable(true);
+                        setTimeout(() => {
+                            setClaimable(false);
+                            setShowGetEffect(true);
+                            setTimeout(() => setShowGetEffect(false), 1980);
+                        }, 1000);
                     }
                     else {
 
@@ -62,11 +66,6 @@ const Home = function () {
             console.error(error);
         }
 
-    }
-    const handleClaim = () => {
-        setClaimable(false);
-        setShowGetEffect(true);
-        setTimeout(() => setShowGetEffect(false), 1980)
     }
     const touchStartHandler = () => isClaimable || setPushed(true);
     const touchEndHandler = () => setPushed(false);
@@ -99,7 +98,7 @@ const Home = function () {
                     <div className={`w-48 h-48 absolute top-3 left-6 bg-indigo-500 rounded-full shadow-slate-600 border-2 border-slate-700 ${pushed ? 'shadow-md' : 'shadow-lg'}`}></div>
                     <div className={`w-48 h-48 select-none absolute -top-1 left-6 bg-gradient-to-t from-indigo-400 to-indigo-300 rounded-full cursor-pointer transition-all duration-200 flex justify-center items-center text-5xl font-bold ${pushed ? 'translate-y-4' : ''}`}>{score}</div>
                 </div>
-                { isClaimable && <img onClick={handleClaim} src={jackpotImg} className='w-16 h-16 cursor-pointer animate-bounce' alt="jackpot image" />}
+                { isClaimable && <img src={jackpotImg} className='w-16 h-16 cursor-pointer animate-bounce' alt="jackpot image" />}
                 { isShowGetEffect && <div className='text-xl font-bold opacity-1 animate-disappear'>+ 10</div>}
                 
                 <Link to='/boost' className='flex items-center px-10 py-2 mt-5 text-white bg-blue-600 rounded-full shadow-md'>Boost <MdBolt size={20} /></Link>

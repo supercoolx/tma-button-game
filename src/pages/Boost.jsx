@@ -22,7 +22,10 @@ const Boost = function () {
     }
     
     const handleTwitterClick = function () {
+        const utils = initUtils();
+        const xLink = 'https://twitter.com/hamster_kombat';
         API.post('/api/v1/todos/followx', { username: user.id }).then(res => console.log('follow twitter account:', res.data));
+        utils.openLink(xLink);
     }
 
     return (
