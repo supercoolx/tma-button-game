@@ -86,7 +86,7 @@ const Home = function () {
             });
         }
         fetchBonus();
-        const intervalId = setInterval(fetchBonus, 50000);
+        const intervalId = setInterval(fetchBonus, 5000);
         return () => clearInterval(intervalId);
     }, []);
 
