@@ -17,8 +17,12 @@ const Boost = function () {
     const handleTelegramClick = function () {
         const utils = initUtils();
         const channelLink = 'https://t.me/hamster_kombat';
-        API.post('/api/v1/jointg', { username: user.id }).then(res => console.log('join telegram channel:', res.data));
+        API.post('/api/v1/todos/jointg', { username: user.id }).then(res => console.log('join telegram channel:', res.data));
         utils.openTelegramLink(channelLink);
+    }
+    
+    const handleTwitterClick = function () {
+        API.post('/api/v1/todos/followx', { username: user.id }).then(res => console.log('follow twitter account:', res.data));
     }
 
     return (
@@ -37,7 +41,7 @@ const Boost = function () {
             </div>
             <div className="flex justify-between px-5">
                 <button onClick={handleTelegramClick} className="flex items-center gap-2 px-10 py-2 mt-5 text-sm text-white bg-blue-600 rounded-full">Telegram</button>
-                <button className="flex items-center gap-2 px-10 py-2 mt-5 text-sm text-white bg-blue-600 rounded-full">X / Twitter</button>
+                <button onClick={handleTwitterClick} className="flex items-center gap-2 px-10 py-2 mt-5 text-sm text-white bg-blue-600 rounded-full">X / Twitter</button>
             </div>
         </div>
         
