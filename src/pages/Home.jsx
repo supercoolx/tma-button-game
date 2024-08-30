@@ -13,12 +13,12 @@ import jackpotImg from '@/assets/images/jackpot.png';
 const Home = function () {
     const user = WebApp.initDataUnsafe.user;
     const username = useMemo(() => {
-        console.log('user info:', user, 'invitor: ' + WebApp.initDataUnsafe.start_param);
-        API.post('api/v1/auth/login', { username: user.id, fullname: user.first_name + ' ' + user.last_name, invitor: WebApp.initDataUnsafe.start_param || '' }).then((res) => {
-			setUserId(res.data.user.userId);
-		});
-        return user.first_name + ' ' + user.last_name;
-        // return 'sldkfj';
+        // console.log('user info:', user, 'invitor: ' + WebApp.initDataUnsafe.start_param);
+        // API.post('api/v1/auth/login', { username: user.id, fullname: user.first_name + ' ' + user.last_name, invitor: WebApp.initDataUnsafe.start_param || '' }).then((res) => {
+		// 	setUserId(res.data.user.userId);
+		// });
+        // return user.first_name + ' ' + user.last_name;
+        return 'sldkfj';
     }, [user]);
 
     const [userId, setUserId] = useState('');
@@ -29,13 +29,14 @@ const Home = function () {
     const [heart, setHeart] = useState(0);
     const [pushed, setPushed] = useState(false);
     const [isClaimable, setClaimable] = useState(false);
+    const [bonusTime, setBonusTime] = useState('');
 
     const mouseDownHandler = async () => {
         if (isClaimable) return;
         setPushed(true);
         try {
-            const response = await API.post('/api/v1/todos', { id: gameId, userid: userId });
-            // const response = { data: { _id: '234', score: 1, max_score: 1, jackpot: 1, heart: 1}};
+            // const response = await API.post('/api/v1/todos', { id: gameId, userid: userId });
+            const response = { data: { _id: '234', score: 1, max_score: 1, jackpot: 1, heart: 1}};
             setGameId(response.data._id);
             setScore(response.data.score);
             setMaxScore(response.data.max_score);
@@ -71,6 +72,24 @@ const Home = function () {
     const mouseUpHandler = () => setPushed(false);
     const mouseLeaveHandler = () => setPushed(false);
 
+    useEffect(() => {
+        const fetchBonus = () => {
+            API.post('api/v1/todos/getboost', { username: user.id }).then((res) => {
+            	const ms = res.data.bonus_time;
+                if (ms > 0) {
+                    const totalMinutes = Math.floor(ms / 60000); // 60000 ms in a minute
+                    const hours = Math.floor(totalMinutes / 60);
+                    const minutes = totalMinutes % 60;
+                    setBonusTime(`${hours} : ${minutes}`);
+                }
+                else setBonusTime('');
+            });
+        }
+        fetchBonus();
+        const intervalId = setInterval(fetchBonus, 50000);
+        return () => clearInterval(intervalId);
+    }, []);
+
     return (
         <div className='w-full min-h-screen bg-[rgb(243,248,240)] text-black'>
             {heart ? <div className='fixed top-0 left-0 z-10 w-screen h-screen animate-warning' style={{ backgroundImage: 'radial-gradient(transparent, #ffaaaa)' }}></div> : ''}
@@ -96,12 +115,10 @@ const Home = function () {
                     className={`w-60 h-60 relative bg-gradient-to-t from-purple-400 to-purple-200 rounded-full border-slate-700 border`} style={{ transform: 'rotateX(30deg)' }}>
                     <div className={`w-48 h-48 absolute top-3 left-6 bg-indigo-500 rounded-full shadow-slate-600 border-2 border-slate-700 ${pushed ? 'shadow-md' : 'shadow-lg'}`}></div>
                     <div className={`w-48 h-48 select-none absolute -top-1 left-6 bg-gradient-to-t from-indigo-400 to-indigo-300 rounded-full cursor-pointer transition-all duration-200 flex justify-center items-center text-5xl font-bold ${pushed ? 'translate-y-4' : ''}`}>{score}</div>
+                    { isClaimable && <img src={jackpotImg} className='absolute h-16 mx-auto cursor-pointer top-[64px] left-[50px] animate-disappear' alt="jackpot image" />}
                 </div>
-                <div className='relative flex justify-center h-60'>
-                    { isClaimable && <img src={jackpotImg} className='relative top-0 h-16 cursor-pointer animate-disappear' alt="jackpot image" />}
-                    <Link to='/boost' className='absolute flex items-center px-10 py-2 mt-5 text-white bg-blue-600 rounded-full shadow-md top-20'>Boost <MdBolt size={20} /></Link>
-                </div>
-                
+                <Link to='/boost' className='flex items-center px-10 py-2 mt-5 text-white bg-blue-600 rounded-full shadow-md'>Boost <MdBolt size={20} /></Link>
+                <p className='pt-3 text-center'>{ bonusTime }</p>
             </div>
         </div>
     )
