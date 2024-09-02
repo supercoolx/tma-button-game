@@ -6,8 +6,8 @@ import { useEffect, useState } from "react";
 
 const Boost = function () {
     const [isTg, setTg] = useState(false);
-    // const user = WebApp.initDataUnsafe.user;
-    const user = {id: 7449972885}; // mock
+    const user = WebApp.initDataUnsafe.user;
+    // const user = {id: 7449972885}; // mock
 
     const handleInviteFriend = function () {
         const utils = initUtils();
