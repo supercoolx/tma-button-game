@@ -18,14 +18,17 @@ const Boost = function () {
     }
 
     const handleTelegramClick = function () {
-        if (isTg) {
-            API.post('/api/v1/todos/jointg', { username: user.id }).then(res => console.log('join telegram channel:', res.data)).catch(console.log);
-        }
-        else {
-            const utils = initUtils();
-            const channelLink = 'https://t.me/thebuttoncoin';
-            utils.openTelegramLink(channelLink);
-        }
+        API.post('/api/v1/todos/jointg', { username: user.id })
+            .then(res => {
+                const success = res.data.success;
+                if (success) {
+                    setTg(true);
+                } else {
+                    const utils = initUtils();
+                    const channelLink = 'https://t.me/thebuttoncoin';
+                    utils.openTelegramLink(channelLink);
+                } 
+            }).catch(console.log);
     }
     
     const handleTwitterClick = function () {
@@ -36,8 +39,12 @@ const Boost = function () {
     }
 
     useEffect(() => {
-        API.post('/api/v1/users/' + user.id).then(res => {
-            if (res.data.user?.jointg) setTg(true); 
+        API.get('/api/v1/users/' + user.id).then(res => {
+            if (res.data.user?.jointg) {
+                setTg(true);
+            } else {
+                
+            }
         });
     }, []);
 
