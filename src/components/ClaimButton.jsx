@@ -14,8 +14,8 @@ const ClaimButton = ({ text, callback }) => {
     }, [visible])
 
     return (
-        <div className='fixed top-0 w-screen h-screen'>
-            <img src={congraImg} className='absolute w-screen h-screen' alt="congratulation" />
+        <div className='fixed w-screen h-screen top-[45px]'>
+            <img src={congraImg} className='absolute w-screen h-screen rounded-3xl' alt="congratulation" />
             <div className='absolute flex justify-center w-full bottom-20'>
                 {visible ? <button onClick={handleClick} className='px-10 py-2 text-white bg-blue-600 rounded-full shadow-md'>{ text }</button> :
                 <img src={jackpotImg} className='h-16 mx-auto opacity-0 cursor-pointer animate-disappear' alt="jackpot image" />}

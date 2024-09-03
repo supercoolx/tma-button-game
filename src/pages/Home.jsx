@@ -1,4 +1,4 @@
-import { useMemo, useState, useEffect } from 'react';
+import { useMemo, useState } from 'react';
 import { ReactSVG } from 'react-svg';
 import API from '@/modules/Api';
 import Audio from '@/modules/Audio';
@@ -73,10 +73,12 @@ const Home = function () {
                     <div className='text-lg font-bold text-blue-500'>buttoncoin</div>
                     <div className='px-4 py-1 text-sm text-white bg-blue-500 rounded-full'>{username}</div>
                 </div>
-                <div className='flex justify-between w-full px-8 mt-3'>
-                    <button className=''><ReactSVG src='./svg/info.svg' /></button>
-                    <button className=''><ReactSVG src='./svg/badge.svg' /></button>
-                    <Link to='/leaderboard' className=''><ReactSVG src='./svg/leaderboard.svg' /></Link>
+                <div className='w-full bg-white'>
+                    <div className='flex justify-between w-full px-8 pt-3 bg-[rgb(243,248,240)] rounded-t-3xl'>
+                        <button className=''><ReactSVG src='./svg/info.svg' /></button>
+                        <button className=''><ReactSVG src='./svg/badge.svg' /></button>
+                        <Link to='/leaderboard' className=''><ReactSVG src='./svg/leaderboard.svg' /></Link>
+                    </div>
                 </div>
                 <div className='flex items-center justify-center w-full gap-3 px-16 my-10'>
                     <ReactSVG src='./svg/medal.svg' /> <span className='text-4xl'>{max_score}</span>
