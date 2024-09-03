@@ -6,7 +6,7 @@ const ClaimButton = ({ text, callback }) => {
     const [visible, setVisible] = useState(true);
     const handleClick = () => {
         setVisible(false);
-        setTimeout(callback, 2000);
+        setTimeout(callback, 1000);
     }
 
     useEffect(() => {
@@ -18,7 +18,8 @@ const ClaimButton = ({ text, callback }) => {
             <img src={congraImg} className='absolute w-screen h-screen rounded-3xl' alt="congratulation" />
             <div className='absolute flex justify-center w-full bottom-20'>
                 {visible ? <button onClick={handleClick} className='px-10 py-2 text-white bg-blue-600 rounded-full shadow-md'>{ text }</button> :
-                <img src={jackpotImg} className='h-16 mx-auto opacity-0 cursor-pointer animate-disappear' alt="jackpot image" />}
+                // <img src={jackpotImg} className='h-16 mx-auto opacity-0 cursor-pointer animate-disappear' alt="jackpot image" />}
+                ''}
             </div>
         </div>
     )
