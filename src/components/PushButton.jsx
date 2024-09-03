@@ -5,6 +5,10 @@ const PushButton = ({ text, disable, callback }) => {
     const [pushed, setPushed] = useState(false);
     // const handleTouchStart = () => !disable && setPushed(true);
     // const handleTouchEnd = () => setPushed(false);
+    const handleClick = () => {
+        if (disable) return;
+        callback();
+    }
     const handleMouseDown = () => !disable && setPushed(true);
     const handleMouseUp = () => setPushed(false);
     const handleMouseLeave = () => setPushed(false);
@@ -17,7 +21,7 @@ const PushButton = ({ text, disable, callback }) => {
 
     return (
         <div
-            onClick={callback}
+            onClick={handleClick}
             onMouseDown={handleMouseDown}
             // onTouchStart={handleTouchStart}
             // onTouchEnd={handleTouchEnd}

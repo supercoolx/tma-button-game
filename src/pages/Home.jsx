@@ -30,7 +30,7 @@ const Home = function () {
     const [loading, setLoading] = useState(false);
 
     const clickHandler = async () => {
-        if (isClaimable) return;
+        if (loading || isClaimable) return;
         setLoading(true);
         try {
             const response = await API.post('/api/v1/todos', { id: gameId, userid: userId });
