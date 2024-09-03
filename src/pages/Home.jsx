@@ -27,10 +27,11 @@ const Home = function () {
     const [max_score, setMaxScore] = useState(0);
     const [heart, setHeart] = useState(0);
     const [isClaimable, setClaimable] = useState(false);
-    const [showWelcome, setShowWelcome] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     const clickHandler = async () => {
         if (isClaimable) return;
+        setLoading(true);
         try {
             const response = await API.post('/api/v1/todos', { id: gameId, userid: userId });
             // const response = { data: { _id: '234', score: 1, max_score: 1, jackpot: 1, heart: 1}};
@@ -46,8 +47,6 @@ const Home = function () {
                     if (response.data.jackpot) {
                         Audio.jackpot.play();
                         setClaimable(true);
-                        setShowWelcome(true);
-                        setTimeout(() => setShowWelcome(false), 3000);
                     }
                     else {
                         Audio.none.play();
@@ -58,8 +57,10 @@ const Home = function () {
             } else {
                 Audio.reset.play();
             }
+            setLoading(false);
         } catch (error) {
             console.error(error);
+            setLoading(false);
         }
 
     }
@@ -67,8 +68,8 @@ const Home = function () {
     return (
         <div className='w-full min-h-screen bg-[rgb(243,248,240)] text-black'>
             {heart ? <div className='fixed top-0 left-0 z-10 w-screen h-screen animate-warning' style={{ backgroundImage: 'radial-gradient(transparent, #ff5555)' }}></div> : ''}
-            <div className='container flex flex-col items-center justify-center pt-3'>
-                <div className='flex justify-between w-full px-3'>
+            <div className='container flex flex-col items-center justify-center'>
+                <div className='flex justify-between w-full px-3 py-2 bg-white'>
                     <div className='text-lg font-bold text-blue-500'>buttoncoin</div>
                     <div className='px-4 py-1 text-sm text-white bg-blue-500 rounded-full'>{username}</div>
                 </div>
@@ -80,7 +81,7 @@ const Home = function () {
                 <div className='flex items-center justify-center w-full gap-3 px-16 my-10'>
                     <ReactSVG src='./svg/medal.svg' /> <span className='text-4xl'>{max_score}</span>
                 </div>
-                <PushButton text={score} disable={isClaimable} callback={clickHandler} />
+                <PushButton text={score} disable={!loading && isClaimable} callback={clickHandler} />
                 <Link to='/boost' className='flex items-center px-10 py-2 mt-10 text-white bg-blue-600 rounded-full shadow-md'>Boost <ReactSVG className='text-white' src='./svg/bolt.svg' /></Link>
                 <BoostTime username={user.id} />
             </div>
