@@ -13,13 +13,12 @@ export default {
         },
         disappear: {
           '0%': { transform: 'translate(0, 0px)', opacity: 1 },
-          '40%': { transform: 'translate(0, 0px)', opacity: 1 },
           '100%': { transform: 'translate(0, -100px)', opacity: 0 }
         }
       },
       animation: {
         warning: 'warning 1s ease-in-out infinite',
-        disappear: 'disappear 2s ease-in-out infinite'
+        disappear: 'disappear 2s ease-in-out 1'
       }
     },
   },

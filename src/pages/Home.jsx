@@ -1,46 +1,42 @@
-import { useMemo } from 'react';
-import { MdBolt } from 'react-icons/md';
-import { FaMedal } from 'react-icons/fa';
-import { useState, useEffect } from 'react';
-import { GiTrophyCup } from 'react-icons/gi';
-import { MdOutlineInfo } from 'react-icons/md';
+import { useMemo, useState, useEffect } from 'react';
+import { ReactSVG } from 'react-svg';
 import API from '@/modules/Api';
 import Audio from '@/modules/Audio';
 import WebApp from '@twa-dev/sdk';
 import { Link } from '@/components/Link/Link';
-import jackpotImg from '@/assets/images/jackpot.png';
+import BoostTime from '@/components/BoostTime';
+import PushButton from '@/components/PushButton';
+import ClaimButton from '@/components/ClaimButton';
 
 const Home = function () {
     const user = WebApp.initDataUnsafe.user;
+    const invitor = WebApp.initDataUnsafe.start_param;
+    // const invitor = '';
+    // const user = { id: 7449972885, first_name: 'Marco', last_name: 'Wong' , invitor };
     const username = useMemo(() => {
-        console.log('user info:', user, 'invitor: ' + WebApp.initDataUnsafe.start_param);
-        API.post('api/v1/auth/login', { username: user.id, fullname: user.first_name + ' ' + user.last_name, invitor: WebApp.initDataUnsafe.start_param || '' }).then((res) => {
+        console.log('user info:', user, 'invitor: ' + invitor);
+        API.post('api/v1/auth/login', { username: user.id, fullname: user.first_name + ' ' + user.last_name, invitor: invitor || '' }).then((res) => {
 			setUserId(res.data.user.userId);
 		});
         return user.first_name + ' ' + user.last_name;
-        // return 'sldkfj';
-    }, [user]);
+    }, []);
 
     const [userId, setUserId] = useState('');
     const [gameId, setGameId] = useState('');
     const [score, setScore] = useState(0);
     const [max_score, setMaxScore] = useState(0);
-    const [jackpot, setJackpot] = useState(0);
     const [heart, setHeart] = useState(0);
-    const [pushed, setPushed] = useState(false);
     const [isClaimable, setClaimable] = useState(false);
-    const [bonusTime, setBonusTime] = useState('');
+    const [showWelcome, setShowWelcome] = useState(false);
 
-    const mouseDownHandler = async () => {
+    const clickHandler = async () => {
         if (isClaimable) return;
-        setPushed(true);
         try {
             const response = await API.post('/api/v1/todos', { id: gameId, userid: userId });
             // const response = { data: { _id: '234', score: 1, max_score: 1, jackpot: 1, heart: 1}};
             setGameId(response.data._id);
             setScore(response.data.score);
             setMaxScore(response.data.max_score);
-            setJackpot(response.data.jackpot);
             setHeart(response.data.heart);
 
             if (response.data.heart == 1) {
@@ -48,78 +44,47 @@ const Home = function () {
                 setTimeout(() => {
                     setHeart(0);
                     if (response.data.jackpot) {
+                        Audio.jackpot.play();
                         setClaimable(true);
-                        setTimeout(() => {
-                            setClaimable(false);
-                        }, 1980);
+                        setShowWelcome(true);
+                        setTimeout(() => setShowWelcome(false), 3000);
                     }
                     else {
-
+                        Audio.none.play();
                     }
                 }, 3000);
             } else if (response.data.score > 0) {
-                Audio.click.play();
+                
             } else {
-                Audio.notify.play();
+                Audio.reset.play();
             }
         } catch (error) {
             console.error(error);
         }
 
     }
-    const touchStartHandler = () => isClaimable || setPushed(true);
-    const touchEndHandler = () => setPushed(false);
-    const mouseUpHandler = () => setPushed(false);
-    const mouseLeaveHandler = () => setPushed(false);
-
-    useEffect(() => {
-        const fetchBonus = () => {
-            API.post('api/v1/todos/getboost', { username: user.id }).then((res) => {
-            	const ms = res.data.bonus_time;
-                if (ms > 0) {
-                    const totalMinutes = Math.floor(ms / 60000); // 60000 ms in a minute
-                    const hours = Math.floor(totalMinutes / 60);
-                    const minutes = totalMinutes % 60;
-                    setBonusTime(`${hours} : ${minutes}`);
-                }
-                else setBonusTime('');
-            });
-        }
-        fetchBonus();
-        const intervalId = setInterval(fetchBonus, 5000);
-        return () => clearInterval(intervalId);
-    }, []);
 
     return (
         <div className='w-full min-h-screen bg-[rgb(243,248,240)] text-black'>
-            {heart ? <div className='fixed top-0 left-0 z-10 w-screen h-screen animate-warning' style={{ backgroundImage: 'radial-gradient(transparent, #ffaaaa)' }}></div> : ''}
-            <div className='container flex flex-col items-center justify-center pt-10'>
-                <div className='flex justify-between w-full px-10'>
+            {heart ? <div className='fixed top-0 left-0 z-10 w-screen h-screen animate-warning' style={{ backgroundImage: 'radial-gradient(transparent, #ff5555)' }}></div> : ''}
+            <div className='container flex flex-col items-center justify-center pt-3'>
+                <div className='flex justify-between w-full px-3'>
                     <div className='text-lg font-bold text-blue-500'>buttoncoin</div>
-                    <div className='px-4 py-1 text-white bg-blue-500 rounded-full'>{username}</div>
+                    <div className='px-4 py-1 text-sm text-white bg-blue-500 rounded-full'>{username}</div>
                 </div>
-                <div className='flex items-center justify-between w-full px-16 mt-3'>
-                    <button className=''><MdOutlineInfo size={30} /></button>
-                    <Link to='/leaderboard' className=''><GiTrophyCup size={30} /></Link>
+                <div className='flex justify-between w-full px-8 mt-3'>
+                    <button className=''><ReactSVG src='./svg/info.svg' /></button>
+                    <button className=''><ReactSVG src='./svg/badge.svg' /></button>
+                    <Link to='/leaderboard' className=''><ReactSVG src='./svg/leaderboard.svg' /></Link>
                 </div>
                 <div className='flex items-center justify-center w-full gap-3 px-16 my-10'>
-                    <FaMedal size={30} /> <span className='text-4xl font-extrabold'>{max_score}</span>
+                    <ReactSVG src='./svg/medal.svg' /> <span className='text-4xl'>{max_score}</span>
                 </div>
-                <div
-                    onMouseDown={mouseDownHandler}
-                    onTouchStart={touchStartHandler}
-                    onTouchEnd={touchEndHandler}
-                    onTouchCancel={mouseUpHandler}
-                    onMouseUp={mouseUpHandler}
-                    onMouseLeave={mouseLeaveHandler}
-                    className={`w-60 h-60 relative bg-gradient-to-t from-purple-400 to-purple-200 rounded-full border-slate-700 border`} style={{ transform: 'rotateX(30deg)' }}>
-                    <div className={`w-48 h-48 absolute top-3 left-6 bg-indigo-500 rounded-full shadow-slate-600 border-2 border-slate-700 ${pushed ? 'shadow-md' : 'shadow-lg'}`}></div>
-                    <div className={`w-48 h-48 select-none absolute -top-1 left-6 bg-gradient-to-t from-indigo-400 to-indigo-300 rounded-full cursor-pointer transition-all duration-200 flex justify-center items-center text-5xl font-bold ${pushed ? 'translate-y-4' : ''}`}>{score}</div>
-                    { isClaimable && <img src={jackpotImg} className='absolute h-16 mx-auto cursor-pointer top-[64px] left-[50px] animate-disappear' alt="jackpot image" />}
-                </div>
-                <Link to='/boost' className='flex items-center px-10 py-2 mt-5 text-white bg-blue-600 rounded-full shadow-md'>Boost <MdBolt size={20} /></Link>
-                <p className='pt-3 text-center'>{ bonusTime }</p>
+                <PushButton text={score} disable={isClaimable} callback={clickHandler} />
+                <Link to='/boost' className='flex items-center px-10 py-2 mt-10 text-white bg-blue-600 rounded-full shadow-md'>Boost <ReactSVG className='text-white' src='./svg/bolt.svg' /></Link>
+                <BoostTime username={user.id} />
             </div>
+            { isClaimable && <ClaimButton text="Claim" callback={() => setClaimable(false)} /> }
         </div>
     )
 }
