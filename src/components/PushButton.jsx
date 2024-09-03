@@ -7,17 +7,12 @@ const PushButton = ({ text, disable, callback }) => {
     // const handleTouchEnd = () => setPushed(false);
     const handleClick = () => {
         if (disable) return;
+        Audio.click.play();
         callback();
     }
     const handleMouseDown = () => !disable && setPushed(true);
     const handleMouseUp = () => setPushed(false);
     const handleMouseLeave = () => setPushed(false);
-
-    useEffect(() => {
-        if (pushed) {
-            Audio.click.play();
-        }
-    }, [pushed]);
 
     return (
         <div

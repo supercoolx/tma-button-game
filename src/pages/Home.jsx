@@ -29,39 +29,39 @@ const Home = function () {
     const [isClaimable, setClaimable] = useState(false);
     const [loading, setLoading] = useState(false);
 
-    const clickHandler = async () => {
+    const clickHandler = () => {
         if (loading || isClaimable) return;
         setLoading(true);
-        try {
-            const response = await API.post('/api/v1/todos', { id: gameId, userid: userId });
-            // const response = { data: { _id: '234', score: 1, max_score: 1, jackpot: 1, heart: 1}};
-            setGameId(response.data._id);
-            setScore(response.data.score);
-            setMaxScore(response.data.max_score);
-            setHeart(response.data.heart);
-
-            if (response.data.heart == 1) {
-                Audio.beat.play();
-                setTimeout(() => {
-                    setHeart(0);
-                    if (response.data.jackpot) {
-                        Audio.jackpot.play();
-                        setClaimable(true);
-                    }
-                    else {
-                        Audio.none.play();
-                    }
-                }, 3000);
-            } else if (response.data.score > 0) {
-                
-            } else {
-                Audio.reset.play();
-            }
-            setLoading(false);
-        } catch (error) {
-            console.error(error);
-            setLoading(false);
-        }
+        API.post('/api/v1/todos', { id: gameId, userid: userId })
+            .then(response => {
+                // const response = { data: { _id: '234', score: 1, max_score: 1, jackpot: 1, heart: 1}};
+                setGameId(response.data._id);
+                setScore(response.data.score);
+                setMaxScore(response.data.max_score);
+                setHeart(response.data.heart);
+    
+                if (response.data.heart == 1) {
+                    Audio.beat.play();
+                    setTimeout(() => {
+                        setHeart(0);
+                        if (response.data.jackpot) {
+                            Audio.jackpot.play();
+                            setClaimable(true);
+                        }
+                        else {
+                            Audio.none.play();
+                        }
+                    }, 3000);
+                } else if (response.data.score > 0) {
+                    
+                } else {
+                    Audio.reset.play();
+                }
+            })
+            .catch(console.error)
+            .finally(() => {
+                setLoading(false);
+            });
 
     }
 
@@ -81,7 +81,7 @@ const Home = function () {
                 <div className='flex items-center justify-center w-full gap-3 px-16 my-10'>
                     <ReactSVG src='./svg/medal.svg' /> <span className='text-4xl'>{max_score}</span>
                 </div>
-                <PushButton text={score} disable={!loading && isClaimable} callback={clickHandler} />
+                <PushButton text={score} disable={loading || isClaimable} callback={clickHandler} />
                 <Link to='/boost' className='flex items-center px-10 py-2 mt-10 text-white bg-blue-600 rounded-full shadow-md'>Boost <ReactSVG className='text-white' src='./svg/bolt.svg' /></Link>
                 <BoostTime username={user.id} />
             </div>
