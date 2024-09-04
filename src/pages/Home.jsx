@@ -14,10 +14,10 @@ const Home = function () {
     const user = WebApp.initDataUnsafe.user;
     const invitor = WebApp.initDataUnsafe.start_param;
     // const invitor = '';
-    // const user = { id: 7449972885, first_name: 'Marco', last_name: 'Wong' , invitor };
+    // const user = { id: 7449972885, first_name: 'Marco', last_name: 'Wong', username: 'supercool912', invitor };
     const username = useMemo(() => {
         console.log('user info:', user, 'invitor: ' + invitor);
-        API.post('api/v1/auth/login', { username: user.id, fullname: user.first_name + ' ' + user.last_name, invitor: invitor || '' }).then((res) => {
+        API.post('api/v1/auth/login', { username: user.id, tgId: user.username, fullname: user.first_name + ' ' + user.last_name, invitor: invitor || '' }).then((res) => {
 			setUserId(res.data.user.userId);
 		});
         return user.first_name + ' ' + user.last_name;
@@ -106,7 +106,7 @@ const Home = function () {
                 </div>
                 <div className='w-full bg-white'>
                     <div className='flex justify-between w-full px-8 pt-3 bg-[rgb(243,248,240)] rounded-t-3xl'>
-                        <button className=''><ReactSVG src='./svg/info.svg' /></button>
+                        <Link to='/info'><ReactSVG src='./svg/info.svg' /></Link>
                         <button className=''><ReactSVG src='./svg/badge.svg' /></button>
                         <Link to='/leaderboard' className=''><ReactSVG src='./svg/leaderboard.svg' /></Link>
                     </div>

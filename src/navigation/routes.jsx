@@ -5,6 +5,7 @@ import { ThemeParamsPage } from '@/pages/ThemeParamsPage/ThemeParamsPage.jsx';
 import { TONConnectPage } from '@/pages/TONConnectPage/TONConnectPage';
 import Home from '@/pages/Home';
 import Boost from '@/pages/Boost';
+import Info from '@/pages/Info';
 import Leaderboard from '@/pages/LeaderBoard';
 
 /**
@@ -21,5 +22,6 @@ import Leaderboard from '@/pages/LeaderBoard';
 export const routes = [
   { path: '/', Component: Home },
   { path: '/boost', Component: Boost },
+  { path: '/info', Component: Info },
   { path: '/leaderboard', Component: Leaderboard },
 ];
