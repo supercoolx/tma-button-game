@@ -18,9 +18,9 @@ const ClaimButton = ({ text, callback }) => {
                     <source src="./video/confetti.mp4" type="video/mp4" />
                 </video>
             </div>
-            <h1 className='absolute top-[40%] text-white text-3xl'>Jackpot Winner!</h1>
+            <h1 className='absolute top-[40%] text-white text-3xl animate-appear'>Jackpot Winner!</h1>
             <div className='absolute flex justify-center w-full bottom-20'>
-                {visible ? <button onClick={handleClick} className='px-10 py-2 text-white bg-blue-600 rounded-full shadow-md'>{ text }</button> :
+                {visible ? <button onClick={handleClick} className='px-10 py-2 text-white bg-blue-600 rounded-full shadow-md animate-appear'>{ text }</button> :
                 // <img src={jackpotImg} className='h-16 mx-auto opacity-0 cursor-pointer animate-disappear' alt="jackpot image" />}
                 ''}
             </div>
