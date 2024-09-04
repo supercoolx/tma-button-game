@@ -22,7 +22,7 @@ const Info = function () {
                 <div className='w-full bg-white'>
                     <div className='flex justify-between w-full px-8 pt-3 bg-[rgb(243,248,240)] rounded-t-3xl'>
                         <Link to='/info'><ReactSVG className="w-6" src='./svg/info.svg' /></Link>
-                        <button className=''><ReactSVG className="w-7" src='./svg/badge.svg' /></button>
+                        <Link to='/jackpot'><ReactSVG className="w-7" src='./svg/badge.svg' /></Link>
                         <Link to='/leaderboard' className=''><ReactSVG className="w-6" src='./svg/leaderboard.svg' /></Link>
                     </div>
                 </div>

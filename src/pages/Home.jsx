@@ -20,7 +20,7 @@ const Home = function () {
         API.post('api/v1/auth/login', { username: user.id, tgId: user.username, fullname: user.first_name + ' ' + user.last_name, invitor: invitor || '' }).then((res) => {
 			setUserId(res.data.user.userId);
 		});
-        return user.first_name + ' ' + user.last_name;
+        return user.username;
     }, []);
     const [heart, setHeart] = useState(0);
     const [isClaimable, setClaimable] = useState(false);
