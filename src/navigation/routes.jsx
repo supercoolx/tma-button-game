@@ -6,6 +6,7 @@ import { TONConnectPage } from '@/pages/TONConnectPage/TONConnectPage';
 import Home from '@/pages/Home';
 import Boost from '@/pages/Boost';
 import Info from '@/pages/Info';
+import Jackpot from '@/pages/JackBoard';
 import Leaderboard from '@/pages/LeaderBoard';
 
 /**
@@ -23,5 +24,6 @@ export const routes = [
   { path: '/', Component: Home },
   { path: '/boost', Component: Boost },
   { path: '/info', Component: Info },
+  { path: '/jackpot', Component: Jackpot },
   { path: '/leaderboard', Component: Leaderboard },
 ];

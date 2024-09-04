@@ -3,7 +3,7 @@ import { useState, useEffect, createContext, useContext } from "react";
 const GameContext = createContext();
 
 const GameProvider = ({ children }) => {
-    const [userId, setUserId] = useState('');
+    const [userId, setUserId] = useState('');//mongodb user id
     const [score, setScore] = useState(0);
     const [maxScore, setMaxScore] = useState(0);
     const [gameId, setGameId] = useState('');

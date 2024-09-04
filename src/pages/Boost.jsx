@@ -1,8 +1,8 @@
 import { HiUsers } from "react-icons/hi";
-import WebApp from '@twa-dev/sdk';
 import { initUtils } from "@telegram-apps/sdk";
 import API from "@/modules/Api";
 import { useEffect, useState } from "react";
+import WebApp from '@twa-dev/sdk';
 
 const Boost = function () {
     const [isTg, setTg] = useState(false);
