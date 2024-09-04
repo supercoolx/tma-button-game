@@ -15,7 +15,7 @@ const ClaimButton = ({ text, callback }) => {
     return (
         <div className='absolute flex flex-col items-center w-full top-48'>
             <div className='w-64'>
-                <video className='object-cover rounded-3xl h-72 border-2 border-[rgb(222,187,2)]' autoPlay loop muted>
+                <video className='object-cover rounded-3xl h-72 border-2 border-[rgb(222,187,2)] select-none touch-none' autoPlay loop muted playsInline>
                     <source src="./video/confetti.mp4" type="video/mp4" />
                 </video>
             </div>
