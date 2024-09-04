@@ -11,10 +11,10 @@ import ClaimButton from '@/components/ClaimButton';
 
 const Home = function () {
     const { userId, setUserId, score, setScore, maxScore, setMaxScore, gameId, setGameId} = useGame();
-    // const user = WebApp.initDataUnsafe.user;
-    // const invitor = WebApp.initDataUnsafe.start_param;
-    const invitor = '';
-    const user = { id: 7449972885, first_name: 'Marco', last_name: 'Wong' , invitor };
+    const user = WebApp.initDataUnsafe.user;
+    const invitor = WebApp.initDataUnsafe.start_param;
+    // const invitor = '';
+    // const user = { id: 7449972885, first_name: 'Marco', last_name: 'Wong' , invitor };
     const username = useMemo(() => {
         console.log('user info:', user, 'invitor: ' + invitor);
         API.post('api/v1/auth/login', { username: user.id, fullname: user.first_name + ' ' + user.last_name, invitor: invitor || '' }).then((res) => {
