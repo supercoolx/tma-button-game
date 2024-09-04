@@ -3,16 +3,18 @@ import { ReactSVG } from 'react-svg';
 import API from '@/modules/Api';
 import Audio from '@/modules/Audio';
 import WebApp from '@twa-dev/sdk';
+import { useGame } from '@/contexts/GameProvider';
 import { Link } from '@/components/Link/Link';
 import BoostTime from '@/components/BoostTime';
 import PushButton from '@/components/PushButton';
 import ClaimButton from '@/components/ClaimButton';
 
 const Home = function () {
-    const user = WebApp.initDataUnsafe.user;
-    const invitor = WebApp.initDataUnsafe.start_param;
-    // const invitor = '';
-    // const user = { id: 7449972885, first_name: 'Marco', last_name: 'Wong' , invitor };
+    const { userId, setUserId, score, setScore, maxScore, setMaxScore, gameId, setGameId} = useGame();
+    // const user = WebApp.initDataUnsafe.user;
+    // const invitor = WebApp.initDataUnsafe.start_param;
+    const invitor = '';
+    const user = { id: 7449972885, first_name: 'Marco', last_name: 'Wong' , invitor };
     const username = useMemo(() => {
         console.log('user info:', user, 'invitor: ' + invitor);
         API.post('api/v1/auth/login', { username: user.id, fullname: user.first_name + ' ' + user.last_name, invitor: invitor || '' }).then((res) => {
@@ -20,11 +22,6 @@ const Home = function () {
 		});
         return user.first_name + ' ' + user.last_name;
     }, []);
-
-    const [userId, setUserId] = useState('');
-    const [gameId, setGameId] = useState('');
-    const [score, setScore] = useState(0);
-    const [max_score, setMaxScore] = useState(0);
     const [heart, setHeart] = useState(0);
     const [isClaimable, setClaimable] = useState(false);
     const [loading, setLoading] = useState(false);
@@ -81,7 +78,7 @@ const Home = function () {
                     </div>
                 </div>
                 <div className='flex items-center justify-center w-full gap-3 px-16 my-10'>
-                    <ReactSVG src='./svg/medal.svg' /> <span className='text-4xl'>{max_score}</span>
+                    <ReactSVG src='./svg/medal.svg' /> <span className='text-4xl'>{maxScore}</span>
                 </div>
                 <PushButton text={score} disable={loading || isClaimable} callback={clickHandler} />
                 <Link to='/boost' className='flex items-center px-10 py-2 mt-10 text-white bg-blue-600 rounded-full shadow-md'>Boost <ReactSVG className='text-white' src='./svg/bolt.svg' /></Link>

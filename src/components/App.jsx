@@ -10,6 +10,8 @@ import {
 	useNavigate,
 } from 'react-router-dom';
 
+import GameProvider from '@/contexts/GameProvider';
+
 import { routes } from '@/navigation/routes.jsx';
 
 function BackButtonManipulator() {
@@ -45,13 +47,15 @@ export function App() {
 			appearance={WebApp.colorScheme}
 			platform={['macos', 'ios'].includes(WebApp.platform) ? 'ios' : 'base'}
 		>
-			<BrowserRouter>
-				<BackButtonManipulator />
-				<Routes>
-					{routes.map((route) => <Route key={route.path} {...route} />)}
-					<Route path='*' element={<Navigate to='/' />} />
-				</Routes>
-			</BrowserRouter>
+			<GameProvider>
+				<BrowserRouter>
+					<BackButtonManipulator />
+					<Routes>
+						{routes.map((route) => <Route key={route.path} {...route} />)}
+						<Route path='*' element={<Navigate to='/' />} />
+					</Routes>
+				</BrowserRouter>
+			</GameProvider>
 		</AppRoot>
 	);
 }
