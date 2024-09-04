@@ -46,37 +46,45 @@ const Leaderboard = function () {
                                     <div className="-translate-y-3">
                                         <span className="bg-[rgb(243,248,240)] px-2">${rankData.rankCounts[key].prize}</span>
                                     </div>
-                                    <div className="grid grid-cols-6 px-3 py-3 -mt-2 bg-white rounded-md place-content-between">
+                                    <div className={`grid grid-cols-6 px-3 py-3 -mt-2 ${ key == rankData.myRank ? 'bg-[rgb(255,215,0,0.49)]' : 'bg-white' } rounded-md place-content-between`}>
                                         <div className="flex col-span-2 gap-3">
                                             <ReactSVG className="w-5" src='./svg/medal.svg' />
                                             <span>{rankData.rankCounts[key].score}</span>
                                         </div>
                                         <div className="flex col-span-3 gap-3">
                                             <ReactSVG className="w-4" src="./svg/user.svg" />
-                                            <span>{rankData.rankCounts[key].count} players</span>
+                                            <span>
+                                                {
+                                                    key == rankData.myRank ?
+                                                        (`You${ rankData.rankCounts[key].count - 1 ? ` & ${rankData.rankCounts[key].count - 1} players` : '' }`) :
+                                                        (`${rankData.rankCounts[key].count} players`)
+                                                }
+                                            </span>
                                         </div>
                                         <div className="flex justify-end col-span-1 gap-3">#{ key }</div>
                                     </div>
                                 </div>
                             ))
                         }
-                        <div className="w-full mt-10 text-center">
-                            <div className="border"></div>
-                            <div className="-translate-y-3">
-                                <span className="bg-[rgb(243,248,240)] px-2">${ rankData.rankCounts[rankData.myRank].prize}</span>
-                            </div>
-                            <div className="grid grid-cols-6 px-3 py-3 -mt-2 bg-[rgb(255,215,0,0.49)] rounded-md place-content-between">
-                                <div className="flex col-span-2 gap-3">
-                                    <ReactSVG className="w-5" src='./svg/medal.svg' />
-                                    <span>{ rankData.myScore }</span>
+                        {
+                            rankData.myRank > 10 && <div className="w-full mt-10 text-center">
+                                <div className="border"></div>
+                                <div className="-translate-y-3">
+                                    <span className="bg-[rgb(243,248,240)] px-2">${ rankData.rankCounts[rankData.myRank].prize}</span>
                                 </div>
-                                <div className="flex col-span-3 gap-3">
-                                    <ReactSVG className="w-4" src="./svg/user.svg" />
-                                    <span>You{ rankData.rankCounts[rankData.myRank].count - 1 ? ` & ${rankData.rankCounts[rankData.myRank].count - 1} players` : '' }</span>
+                                <div className="grid grid-cols-6 px-3 py-3 -mt-2 bg-[rgb(255,215,0,0.49)] rounded-md place-content-between">
+                                    <div className="flex col-span-2 gap-3">
+                                        <ReactSVG className="w-5" src='./svg/medal.svg' />
+                                        <span>{ rankData.myScore }</span>
+                                    </div>
+                                    <div className="flex col-span-3 gap-3">
+                                        <ReactSVG className="w-4" src="./svg/user.svg" />
+                                        <span>You{ rankData.rankCounts[rankData.myRank].count - 1 ? ` & ${rankData.rankCounts[rankData.myRank].count - 1} players` : '' }</span>
+                                    </div>
+                                    <div className="flex justify-end col-span-1 gap-3">#{ rankData.myRank }</div>
                                 </div>
-                                <div className="flex justify-end col-span-1 gap-3">#{ rankData.myRank }</div>
                             </div>
-                        </div>
+                        }
                     </div>
                 }
                 <Link to='/boost' className='flex items-center px-20 py-2 mt-20 text-sm text-white bg-blue-600 rounded-full shadow-md'>Boost <ReactSVG className='w-3 text-white' src='./svg/bolt.svg' /></Link>

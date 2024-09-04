@@ -17,10 +17,11 @@ const PushButton = ({ text, disable, callback }) => {
             setLocked(true);
             setTimeout(() => {
                 setPushed(false);
+                Audio.click.play();
+                callback();
+                
                 setTimeout(() => {
                     setLocked(false);
-                    Audio.click.play();
-                    callback();
                 }, 100);
             }, 100);
         }
