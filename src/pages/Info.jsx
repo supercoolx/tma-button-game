@@ -5,6 +5,34 @@ import BoostTime from "@/components/BoostTime";
 import LogoImg from '@/assets/images/logo.png';
 import WebApp from '@twa-dev/sdk';
 
+const pageData = [
+    {
+        title: "How to Play",
+        content: [
+            'Every time the button is pressed, your score goes up with 1 point. However, every press on the button increases the chance that your score will be reset with 1%. ',
+            'The top X players on the leaderboard will receive weekly prizes.'
+        ],
+    },
+    {
+        title: "Leaderboard",
+        content: [
+            'Players with the high scores will be listed on the leaderboard ranking. Prizes increase as the community increases. Potential winnings can be found in the leaderboard.'
+        ],
+    },
+    {
+        title: "Jackpot",
+        content: [
+            'Every week the Jackpot prize will be divided amongst all Jackpot winners. The "heartbeat" serves as a jackpot indicator, which will be revealed after. Jackpots will increase as the community increases.'
+        ],
+    },
+    {
+        title: "Boostbutton",
+        content: [
+            'The boost button can be used to double your jackpot chances. This can be done through a friend referral, or following our social media platforms. More to come...'
+        ],
+    },
+]
+
 const Info = function () {
     const user = WebApp.initDataUnsafe.user;
     const [page, setPage] = useState(1);
@@ -32,9 +60,8 @@ const Info = function () {
                         <div><img alt="logo" className="w-10" src={LogoImg} /></div>
                         <Link to='/'><ReactSVG className="w-5" src="./svg/close.svg" /></Link>
                     </div>
-                    <h1 className="mt-4 text-center">{ page == 1 ? 'How to play' : `Page ${page}` }</h1>
-                    <p className="px-8 mt-5">Every time the button is pressed, your score goes up with 1 point. However, every press on the button increases the chance that your score will be reset with 1%. </p><br />
-                    <p className="px-8">The top 10 ranked players on the leaderboard will receive weekly prizes.</p>
+                    <h1 className="mt-4 mb-8 text-center">{ pageData[page - 1] }</h1>
+                    { pageData[page - 1].content.map((text) => <><p className="px-8">{text}</p><br /></>) }
                     <div className="flex justify-between mt-20 mb-5">
                         <div onClick={handlePrev} className="flex justify-start flex-1 ml-5"><button><ReactSVG className="rotate-180 w-7" src="./svg/right.svg" /></button></div>
                         <div className="flex-1"><button className="px-16 py-1 text-sm text-white bg-blue-600 rounded-full grid-">whitepaper</button></div>
