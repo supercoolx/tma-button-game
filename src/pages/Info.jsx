@@ -60,7 +60,7 @@ const Info = function () {
                         <div><img alt="logo" className="w-10" src={LogoImg} /></div>
                         <Link to='/'><ReactSVG className="w-5" src="./svg/close.svg" /></Link>
                     </div>
-                    <h1 className="mt-4 mb-8 text-center">{ pageData[page - 1] }</h1>
+                    <h1 className="mt-4 mb-8 text-center">{ pageData[page - 1].title }</h1>
                     { pageData[page - 1].content.map((text, key) => <p key={key} className="px-8">{text}<br /></p>) }
                     <div className="flex justify-between mt-20 mb-5">
                         <div onClick={handlePrev} className="flex justify-start flex-1 ml-5"><button><ReactSVG className="rotate-180 w-7" src="./svg/right.svg" /></button></div>
