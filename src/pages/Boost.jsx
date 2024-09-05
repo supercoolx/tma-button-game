@@ -35,7 +35,12 @@ const Boost = function () {
     const handleTwitterClick = function () {
         const utils = initUtils();
         const xLink = 'https://X.com/thebuttoncoin';
-        API.post('/api/v1/todos/followx', { username: user.id }).then(res => console.log('follow twitter account:', res.data)).catch(console.log);
+        API.post('/api/v1/todos/followx', { username: user.id }).then(res => {
+            console.log('follow twitter account:', res.data);
+            if(success) {
+                setX(true);
+            }
+        }).catch(console.log);
         utils.openLink(xLink);
     }
 
