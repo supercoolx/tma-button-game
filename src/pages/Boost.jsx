@@ -19,6 +19,7 @@ const Boost = function () {
     }
 
     const handleTelegramClick = function () {
+        if (isTg) return;
         API.post('/api/v1/todos/jointg', { username: user.id })
             .then(res => {
                 const success = res.data.success;
@@ -33,6 +34,7 @@ const Boost = function () {
     }
     
     const handleTwitterClick = function () {
+        if (isX) return;
         const utils = initUtils();
         const xLink = 'https://X.com/thebuttoncoin';
         API.post('/api/v1/todos/followx', { username: user.id }).then(res => console.log('follow twitter account:', res.data)).catch(console.log);
@@ -65,8 +67,8 @@ const Boost = function () {
                 <p className="mt-3 text-center">Time: 4h each</p>
             </div>
             <div className="flex justify-between px-5">
-                <button onClick={isTg ? '' : handleTelegramClick} className={`flex items-center gap-2 px-10 py-2 mt-5 text-sm text-white bg-blue-600 rounded-full ${isTg ? 'opacity-50' : ''}`}>Telegram { isTg ? 'joined' : ''}</button>
-                <button onClick={isX ? '' : handleTwitterClick} className={`flex items-center gap-2 px-10 py-2 mt-5 text-sm text-white bg-blue-600 rounded-full  ${isX ? 'opacity-50' : ''}`}>X / Twitter { isX ? 'joined' : ''}</button>
+                <button onClick={handleTelegramClick} className={`flex items-center gap-2 px-10 py-2 mt-5 text-sm text-white bg-blue-600 rounded-full ${isTg ? 'opacity-50' : ''}`}>Telegram { isTg ? 'joined' : ''}</button>
+                <button onClick={handleTwitterClick} className={`flex items-center gap-2 px-10 py-2 mt-5 text-sm text-white bg-blue-600 rounded-full  ${isX ? 'opacity-50' : ''}`}>X / Twitter { isX ? 'joined' : ''}</button>
             </div>
         </div>
         
