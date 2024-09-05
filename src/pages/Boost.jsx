@@ -39,7 +39,7 @@ const Boost = function () {
     }
 
     useEffect(() => {
-        API.get('/api/v1/users/' + user.id).then(res => {
+        API.get('/api/v1/users/getUser/' + user.id).then(res => {
             if (res.data.user?.jointg) {
                 setTg(true);
             } else {
