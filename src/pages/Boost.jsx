@@ -6,6 +6,7 @@ import WebApp from '@twa-dev/sdk';
 
 const Boost = function () {
     const [isTg, setTg] = useState(false);
+    const [isX, setX] = useState(false);
     const user = WebApp.initDataUnsafe.user;
     // const user = {id: 7449972885}; // mock
 
@@ -42,8 +43,9 @@ const Boost = function () {
         API.get('/api/v1/users/getUser/' + user.id).then(res => {
             if (res.data.user?.jointg) {
                 setTg(true);
-            } else {
-                
+            }
+            if (res.data.user?.followx) {
+                setX(true);
             }
         });
     }, []);
@@ -63,8 +65,8 @@ const Boost = function () {
                 <p className="mt-3 text-center">Time: 4h each</p>
             </div>
             <div className="flex justify-between px-5">
-                <button onClick={handleTelegramClick} className="flex items-center gap-2 px-10 py-2 mt-5 text-sm text-white bg-blue-600 rounded-full">Telegram { isTg ? 'joined' : ''}</button>
-                <button onClick={handleTwitterClick} className="flex items-center gap-2 px-10 py-2 mt-5 text-sm text-white bg-blue-600 rounded-full">X / Twitter</button>
+                <button onClick={isTg ? '' : handleTelegramClick} className={`flex items-center gap-2 px-10 py-2 mt-5 text-sm text-white bg-blue-600 rounded-full ${isTg ? 'opacity-50' : ''}`}>Telegram { isTg ? 'joined' : ''}</button>
+                <button onClick={isX ? '' : handleTwitterClick} className={`flex items-center gap-2 px-10 py-2 mt-5 text-sm text-white bg-blue-600 rounded-full  ${isX ? 'opacity-50' : ''}`}>X / Twitter { isX ? 'joined' : ''}</button>
             </div>
         </div>
         
