@@ -39,11 +39,10 @@ const Boost = function () {
             const success = res.data.success;
             if(success) {
                 setX(true);
-            } else {
-                const utils = initUtils();
-                const xLink = 'https://X.com/thebuttoncoin';
-                utils.openLink(xLink);
             }
+            const utils = initUtils();
+            const xLink = 'https://X.com/thebuttoncoin';
+            utils.openLink(xLink);
         }).catch(console.log);
     }
 
