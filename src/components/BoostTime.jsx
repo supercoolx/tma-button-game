@@ -13,7 +13,6 @@ const BoostTime = ({ username }) => {
 
     useEffect(() => {
         if (remain > 0) {
-            console.log(remain);
             const id = setTimeout(() => setRemain(remain - 1000), 1000);
             return () => clearTimeout(id);
         }

@@ -11,7 +11,7 @@ const Jackpot = function () {
     const [remain, setRemain] = useState('');
     useEffect(() =>{
         API.get('/api/v1/todos/getjackboard/' + user.id, {}).then((res) => {
-            console.log(res.data);
+            console.log("jackborad=", res.data);
             setData(res.data);
             let days = Math.floor(res.data.remainTime /1000 / 60 / 60 / 24);
             let hours = Math.ceil(res.data.remainTime /1000 / 60 / 60) % 24;
