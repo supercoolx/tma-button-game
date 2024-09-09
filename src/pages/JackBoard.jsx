@@ -37,20 +37,34 @@ const Jackpot = function () {
                         <Link to='/info'><ReactSVG className="w-6" src='./svg/info.svg' /></Link>
                     </div>
                 </div>
-                { data?.exist &&
-                    <div className="w-full text-sm px-7">
-                        <div className="w-full mt-10 text-center">
-                            <div className="border"></div>
-                            <div className="-translate-y-3">
-                                <span className="bg-[rgb(243,248,240)] px-2">$250</span>
-                            </div>
-                            <div className="flex justify-center items-center gap-3 px-3 py-3 -mt-2 bg-[rgb(255,215,0,0.49)] rounded-md place-content-between">
-                                <ReactSVG className="w-4" src="./svg/user.svg" />
-                                <span>You{ data.total - 1 ? ` & ${data.total - 1} other players` : '' }</span>
-                            </div>
+                <div className="w-full text-sm px-7">
+                    <div className="w-full mt-10 text-center">
+                        <div className="border"></div>
+                        <div className="-translate-y-3">
+                            <span className="bg-[rgb(243,248,240)] px-2">$250</span>
+                        </div>
+                        <div className="flex justify-center items-center gap-3 px-3 py-3 -mt-2 bg-[rgb(255,215,0,0.49)] rounded-md place-content-between">
+                            { data?.total ? (
+                                data?.exist ? (
+                                    <>
+                                        <ReactSVG className="w-4" src="./svg/user.svg" />
+                                        <span>You{ data.total - 1 ? ` & ${data.total - 1} other players` : '' }</span>
+                                    </>
+                                ) : (
+                                    <>
+                                        <ReactSVG className="w-4" src="./svg/user.svg" />
+                                        <span>{data.total} players</span>
+                                    </>
+                                )
+                            ) : (
+                                <>
+                                    <ReactSVG className="w-4" src="./svg/user.svg" />
+                                    <span>No jackpot players</span>
+                                </>)
+                            }
                         </div>
                     </div>
-                }
+                </div>
                 <Link to='/boost' className='flex items-center px-20 py-2 mt-20 text-sm text-white bg-blue-600 rounded-full shadow-md'>Boost <ReactSVG className='w-3 text-white' src='./svg/bolt.svg' /></Link>
                 <BoostTime username={user.id} />
             </div>
