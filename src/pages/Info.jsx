@@ -4,6 +4,7 @@ import { ReactSVG } from "react-svg";
 import BoostTime from "@/components/BoostTime";
 import LogoImg from '@/assets/images/logo.png';
 import WebApp from '@twa-dev/sdk';
+import { initUtils } from "@telegram-apps/sdk";
 
 const pageData = [
     {
@@ -39,6 +40,11 @@ const Info = function () {
 
     const handlePrev = () => setPage((page - 1) < 1 ? 4 : page - 1);
     const handleNext = () => setPage((page + 1) > 4 ? 1 : page + 1);
+    const handleWhitePaper = () => {
+        const utils = initUtils();
+        const channelLink = 'https://t.me/thebuttoncoin';
+        utils.openTelegramLink(channelLink);
+    }
 
     return (
         <div className='w-full min-h-screen bg-[rgb(243,248,240)] text-black'>
@@ -61,10 +67,12 @@ const Info = function () {
                         <Link to='/'><ReactSVG className="w-5" src="./svg/close.svg" /></Link>
                     </div>
                     <h1 className="mt-4 mb-8 text-center">{ pageData[page - 1].title }</h1>
-                    { pageData[page - 1].content.map((text, key) => <p key={key} className="px-8">{text}<br /></p>) }
-                    <div className="flex justify-between mt-20 mb-5">
+                    <div className="h-[150px]">
+                        { pageData[page - 1].content.map((text, key) => <p key={key} className="px-8">{text}<br /></p>) }
+                    </div>
+                    <div className="flex justify-between my-5">
                         <div onClick={handlePrev} className="flex justify-start flex-1 ml-5"><button><ReactSVG className="rotate-180 w-7" src="./svg/right.svg" /></button></div>
-                        <div className="flex-1"><button className="px-16 py-1 text-sm text-white bg-blue-600 rounded-full grid-">whitepaper</button></div>
+                        <div className="flex-1"><button onClick={handleWhitePaper} className="px-16 py-1 text-sm text-white bg-blue-600 rounded-full grid-">whitepaper</button></div>
                         <div onClick={handleNext} className="flex justify-end flex-1 mr-5"><button><ReactSVG className="w-7" src="./svg/right.svg" /></button></div>
                     </div>
                 </div>
