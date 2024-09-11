@@ -70,7 +70,7 @@ const Leaderboard = function () {
                             rankData.myRank > 10 && <div className="w-full mt-10 text-center">
                                 <div className="border"></div>
                                 <div className="-translate-y-3">
-                                    <span className="bg-[rgb(243,248,240)] px-2">${ rankData.rankCounts[rankData.myRank].prize}</span>
+                                    <span className="bg-[rgb(243,248,240)] px-2">$0</span>
                                 </div>
                                 <div className="grid grid-cols-6 px-3 py-3 -mt-2 bg-[rgb(255,215,0,0.49)] rounded-md place-content-between">
                                     <div className="flex col-span-2 gap-3">
@@ -79,7 +79,7 @@ const Leaderboard = function () {
                                     </div>
                                     <div className="flex col-span-3 gap-3">
                                         <ReactSVG className="w-4" src="./svg/user.svg" />
-                                        <span>You{ rankData.rankCounts[rankData.myRank].count - 1 ? ` & ${rankData.rankCounts[rankData.myRank].count - 1} players` : '' }</span>
+                                        <span>You</span>
                                     </div>
                                     <div className="flex justify-end col-span-1 gap-3">#{ rankData.myRank }</div>
                                 </div>
