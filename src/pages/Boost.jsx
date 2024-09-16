@@ -12,7 +12,7 @@ const Boost = function () {
 
     const handleInviteFriend = function () {
         const utils = initUtils();
-        const inviteLink = `https://t.me/button_coin_bot/game?startapp=${user.id}`;
+        const inviteLink = `https://t.me/button_jackpot_bot/game?startapp=${user.id}`;
         const shareText = 'Play the Buttoncoin with me! Click & Win! Start here to boost your chance on winning the Jackpot!';
         const fullUrl = `https://t.me/share/url?url=${encodeURIComponent(inviteLink)}&text=${encodeURIComponent(shareText)}`;
         utils.openTelegramLink(fullUrl);
