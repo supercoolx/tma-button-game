@@ -1,21 +1,8 @@
-# ❤️Telegram Mini Apps React Template❤️
-
-This template demonstrates how developers can implement a single-page application on the Telegram
-Mini Apps platform using the following technologies and libraries:
-
-- [React](https://react.dev/)
-- [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
-- [TON Connect](https://docs.ton.org/develop/dapps/ton-connect/overview)
-- [Telegram SDK](https://core.telegram.org/bots/webapps#initializing-mini-apps)
-- [Telegram UI](https://github.com/Telegram-Mini-Apps/TelegramUI)
-- [Vite](https://vitejs.dev/)
-
-> The template was created using [npm](https://www.npmjs.com/). Therefore, it is required to use
-> it for this project as well. Using other package managers, you will receive a corresponding error.
+# ❤️Jackpot Telegram Button Mini App❤️
 
 ## Install Dependencies
 
-If you have just cloned this template, you should install the project dependencies using the
+If you have just cloned this project, you should install the project dependencies using the
 command:
 
 ```Bash
